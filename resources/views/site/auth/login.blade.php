@@ -34,33 +34,39 @@
                             <img src="{{ asset('public/front_end/images/login-logo.svg')}}" alt="" />
                         </div>
                         <h1 class=" text-center wow bounceInRight logo-heading-text">AS Project Owner</h1>
-                        <form action="{{ route('Userlogin') }}" method="post" id="loginForm">
+                        <form action="{{ route('Userlogin') }}" method="POST" id="loginForm">
                             @csrf
+
                             <div class="mb-3">
-                                <label class="form-label wow bounceInRight">Email </label>
+                                <label class="form-label wow bounceInRight">Email</label>
                                 <input class="form-control form-control-lg" name="email" type="email" placeholder="Enter your email">
                                 @if ($errors->has('email'))
                                 <span class="error"><small>{{ ucwords($errors->first('email')) }}</small></span>
                                 @endif
-
                             </div>
+
                             <div class="mb-3 position-relative">
                                 <label class="form-label wow bounceInRight">Password</label>
-                                <input class="form-control form-control-lg" name="password" type="password" placeholder="Enter your Password">
-                                <button class="hide-icon" class="btn btn-outline-secondary" id="togglePassword"><i class="fas fa-eye"></i> </button>
+                                <input class="form-control form-control-lg" id="password" name="password" type="password" placeholder="Enter your Password">
+                               
+                                <button type="button" class="hide-icon btn btn-outline-secondary" id="togglePassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+
                                 @if ($errors->has('password'))
                                 <span class="error"><small>{{ ucwords($errors->first('password')) }}</small></span>
                                 @endif
-
                             </div>
 
                             <div class="text-center">
-                                <button class="btn send-button-one btn-lg mt-3" onclick="loader('show');$('#loginForm').submit();">Login</button>
+                                <button type="submit" class="btn send-button-one btn-lg mt-3">Login</button>
                             </div>
+
                             <div class="text-center need-our-text1">
                                 New on our platform? <a href="{{ route('sign_up') }}">Create an account</a>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -72,6 +78,7 @@
 
 @push('script')
 <script>
+    
     $(document).ready(function() {
         $('#togglePassword').on('click', function() {
             const passwordField = $('#password');
@@ -87,6 +94,7 @@
             }
         });
     });
+    
 
     setTimeout(() => {
         $('.error').hide();

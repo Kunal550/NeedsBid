@@ -27,20 +27,8 @@
                                                 @csrf
 
                                                 <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label for="name" class="form-label">User Type <span class="req">*</span></label>
-                                                            <select name="user_type" id="user_type" class="form-control user_type">
-                                                                <option value="">Select User</option>
-                                                                <option value="0">User </option>
 
-                                                                <option value="2">Clients </option>
-
-                                                                <option value="3">Contractors</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label for="name" class="form-label">Name <span class="req">*</span></label>
                                                             <input type="text" id="name" class="form-control" name="name" placeholder="Name">
@@ -75,26 +63,18 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                               
-                                                <!-- <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="form-group">
-                                                            <label for="address" class="form-label">Address <span class="req">*</span></label>
-                                                            <input type="address" id="address" class="form-control" name="address"
-                                                                placeholder="Address">
-                                                            @if ($errors->has('address'))
-                                                            <span class="error"><small>{{ ucwords($errors->first('address')) }}</small></span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
 
-                                                </div> -->
+
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
                                                             <label for="password" class="form-label">Password <span class="req">*</span></label>
                                                             <input type="password" id="password" minlength="6" maxlength="16" class="form-control"
                                                                 name="password">
+                                                            <button type="button" class="hide-icon btn btn-outline-secondary" id="togglePassword">
+                                                                <i class="fas fa-eye"></i>
+                                                            </button>
+
 
                                                         </div>
                                                     </div>
@@ -103,6 +83,10 @@
                                                             <label for="confirm_password" class="form-label">Confirm Password <span class="req">*</span></label>
                                                             <input type="password" id="confirm_password" minlength="6" maxlength="15"
                                                                 class="form-control" name="confirm_password">
+
+                                                            <button type="button" class="hide-icon btn btn-outline-secondary" id="togglePassword1">
+                                                                <i class="fas fa-eye"></i>
+                                                            </button>
                                                             @if ($errors->has('confirm_password'))
                                                             <span
                                                                 class="error"><small>{{ ucwords($errors->first('confirm_password')) }}</small></span>
@@ -208,21 +192,6 @@
                         },
                     },
 
-                    address: {
-                        validators: {
-                            notEmpty: {
-                                message: "Address is required",
-                            },
-                        },
-                    },
-
-                    user_type: {
-                        validators: {
-                            notEmpty: {
-                                message: "User Type is required",
-                            },
-                        },
-                    },
                     captcha: {
                         validators: {
                             notEmpty: {
@@ -247,8 +216,8 @@
                 if (res.status == '1') {
                     toastr.success(res.msg);
                     setTimeout(() => {
-                        location.reload();
-                    }, 3000);
+                        location.href = "{{ route('login_user') }}";
+                    }, 2000);
                 } else {
                     toastr.error(res.msg);
                 }
@@ -259,6 +228,32 @@
         });
 
 
+    });
+
+    $('#togglePassword').on('click', function() {
+        const passwordField = $('#password');
+        const icon = $(this).find('i');
+
+        if (passwordField.attr('type') === 'password') {
+            passwordField.attr('type', 'text');
+            icon.removeClass('fa-eye').addClass('fa-eye-slash');
+        } else {
+            passwordField.attr('type', 'password');
+            icon.removeClass('fa-eye-slash').addClass('fa-eye');
+        }
+    });
+
+    $('#togglePassword1').on('click', function() {
+        const passwordField = $('#confirm_password');
+        const icon = $(this).find('i');
+
+        if (passwordField.attr('type') === 'password') {
+            passwordField.attr('type', 'text');
+            icon.removeClass('fa-eye').addClass('fa-eye-slash');
+        } else {
+            passwordField.attr('type', 'password');
+            icon.removeClass('fa-eye-slash').addClass('fa-eye');
+        }
     });
 
     $(".btn-refresh").click(function() {

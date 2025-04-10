@@ -59,22 +59,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="name" class="form-label">Permissions</label>
-                                <select name="permission[]" multiple="multiple" class="3col active">
-                                    @foreach($permissions as $permission)
-                                    <option value="{{ $permission->id }}">{{ $permission->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
 
                 </div>
                 <!-- /.card-body -->

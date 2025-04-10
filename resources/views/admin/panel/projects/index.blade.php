@@ -51,11 +51,14 @@
 </script>
 @endif
 <div class="content-wrapper">
-    <div class="content-header">
+<div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-md-12 pull-right">
-
+                    @can('project-create')
+                    <a class="btn btn-success btn-sm add-btn pull-right"
+                        href="{{ route('admin.projects.project-create') }}">+ Create</a>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -64,10 +67,6 @@
         <div class="container-fluid">
             <div class="row table-resposive">
                 <div class="col-md-12">
-                    @can('project-create')
-                    <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.projects.project-create') }}">+ Create Project</a>
-                    @endcan
-
                     <table class="table table-striped table-bordered" id="projecttbl">
                         <thead>
                             <tr>

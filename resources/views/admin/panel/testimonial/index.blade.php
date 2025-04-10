@@ -44,17 +44,14 @@
 </script>
 @endif
 <div class="content-wrapper">
-    <div class="content-header">
+<div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Testimonial</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.login') }}">Home</a></li>
-                        <li class="breadcrumb-item">Testimonial</li>
-                    </ol>
+                <div class="col-md-12 pull-right">
+                    @can('testimonial-create')
+                    <a class="btn btn-success btn-sm add-btn pull-right"
+                        href="{{ route('admin.cms.testimonial.create') }}">+ Create</a>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -63,9 +60,7 @@
         <div class="container-fluid">
             <div class="row table-resposive">
                 <div class="col-md-12">
-                    @can('testimonial-create')
-                    <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.cms.testimonial.create') }}">+ Create</a>
-                    @endcan
+                    
                     <table class="table table-striped table-bordered" id="testimonialtbl">
                         <thead>
                             <tr>

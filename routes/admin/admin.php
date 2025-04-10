@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
         Route::match(['GET', 'POST'], '/role-create', [RoleController::class, "create"])->name('role-create');
         Route::match(['GET', 'POST'], '/role-store', [RoleController::class, 'store'])->name('role-store');
         Route::match(['GET', 'POST'], '/role-edit/{id}', [RoleController::class, "edit"])->name('role-edit');
-        Route::delete('/role-delete/{id}', [RoleController::class, 'destroy'])->name('role-delete');
+        Route::match(['GET', 'POST'], '/delete', [RoleController::class, 'destroy'])->name('delete');
     });
 
     #permissions

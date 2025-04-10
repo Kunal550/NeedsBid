@@ -21,7 +21,7 @@ class RoleController extends Controller
         } catch (AuthorizationException $e) {
             return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
         }
-        $data = Role::orderBy('id','DESC')->get();
+        $data = Role::orderBy('id','DESC')->latest()->paginate(10);
         return view('admin.panel.role.index', compact('data'));
     }
 
@@ -78,15 +78,29 @@ class RoleController extends Controller
         return view('admin.panel.role.edit',compact('data'));
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        
         try {
             Gate::authorize('role-delete');
         } catch (AuthorizationException $e) {
             return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
         }
-        Role::where('id',decrypt($id))->delete();
-        return redirect()->route('admin.roles.list')->with('error','Role deleted successfully.');
+        if ($request->tbl != '') {
+            $rowid = ($request->rowid != null) ? base64_decode($request->rowid) : null;
+            if ($rowid != null) :
+                if ($upadte = DB::table($request->tbl)->where([['id', '=', $rowid]])) {
+                    Role::where('id', $rowid)->delete();
+                    return response()->json(['code' => 200, 'msg' => 'Deleted Successfully!!', 'data' => $upadte]);
+                }
+                return response()->json(['code' => 500, 'msg' => 'Something went wrong.', 'data' => '']);
+            endif;
+        }
+        return response()->json(['code' => 500, 'msg' => 'Table value required.', 'data' => '']);
+
+
+
+        
     }
 
     

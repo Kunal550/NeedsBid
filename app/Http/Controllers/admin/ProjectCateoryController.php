@@ -9,17 +9,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class ProjectCateoryController extends Controller
 {
     public function index(Request $request)
     {
+        try {
+            Gate::authorize('project-category');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $data['project_categories'] = ProjectCategory::where([['status', 'A']])->latest()->paginate(10);
         return view('admin.panel.project_category.index', @$data);
     }
 
     public function create()
     {
+        try {
+            Gate::authorize('project-category-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         return view('admin.panel.project_category.create');
     }
 
@@ -52,7 +64,11 @@ class ProjectCateoryController extends Controller
 
     public function editcategory($id)
     {
-
+        try {
+            Gate::authorize('project-category-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $id = base64_decode($id);
 
         $category = ProjectCategory::where([['id', '=', $id]])->first();
@@ -97,6 +113,11 @@ class ProjectCateoryController extends Controller
 
     public function delete(Request $request)
     {
+        try {
+            Gate::authorize('project-category-delete');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
 
         if ($request->tbl != '') {
             $rowid = ($request->rowid != null) ? base64_decode($request->rowid) : null;

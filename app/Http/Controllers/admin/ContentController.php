@@ -9,17 +9,29 @@ use App\Models\ContentModel;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class ContentController extends Controller
 {
     public function index(Request $request)
     {
+        try {
+            Gate::authorize('content');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $data['contents'] = ContentModel::where([['status', '!=', 'D']])->latest()->paginate(10);
         return view('admin.panel.content.index', $data);
     }
 
     public function create(Request $request)
     {
+        try {
+            Gate::authorize('content-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         return view('admin.panel.content.create');
     }
 
@@ -68,6 +80,11 @@ class ContentController extends Controller
 
     public function editContent(Request $request, $id)
     {
+        try {
+            Gate::authorize('content-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $id = base64_decode($id);
         $data['content'] = ContentModel::where('id', $id)->first();
         return view('admin.panel.content.edit', $data);
@@ -83,15 +100,14 @@ class ContentController extends Controller
                 mkdir(public_path($upPath), 0777, true);
             }
             $file->move(public_path($upPath), $filename);
-        }
-        elseif($request->content_id) {
+        } elseif ($request->content_id) {
             $filename = ContentModel::where([['id', '=', $request->content_id]])->first()->content_images;
             $filename = $filename == null ? 'noimg.png' : $filename;
-        }else{
-            $filename ='';
+        } else {
+            $filename = '';
         }
         ContentModel::where('id', $request->content_id)->update([
-           
+
             'title'             => $request->title,
             'content_images'             =>  $filename,
             'button_name'             =>  $request->button_name,
@@ -105,6 +121,11 @@ class ContentController extends Controller
 
     public function delete(Request $request)
     {
+        try {
+            Gate::authorize('content-delete');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         if ($request->tbl != '') {
             $rowid = ($request->rowid != null) ? base64_decode($request->rowid) : null;
             if ($rowid != null) :

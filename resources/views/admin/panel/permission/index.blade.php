@@ -12,24 +12,27 @@
     }
 
     .img {
-        height: 30px;
-        width: 30px;
+        height: 50px;
+        width: 50px;
         border-radius: 50%;
     }
+
 
     .oldimg {
         display: none;
     }
 
-    .morecontent span {
-        display: none;
+    .select2-container {
+        width: 100% !important;
+        padding: 0;
     }
 
-    .ReadMore {
-        display: visible;
+    .select2-container .select2-selection--single {
+        height: 38px;
     }
 </style>
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+<script src="https://cdn.ckeditor.com/ckeditor5/38.1.0/classic/ckeditor.js"></script>
 @endpush
 @section('content')
 @if (session('error'))
@@ -42,73 +45,118 @@
     toastr.success("{{ session('success') }}")
 </script>
 @endif
-
 <div class="content-wrapper">
-
-    <div class="content">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Permission</h3>
-                <div class="card-tools">
-                    <a href="{{ route('admin.permissions.permission-create') }}" class="btn btn-sm btn-primary">Add</a>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Permission</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.login') }}">Home</a></li>
+                        <li class="breadcrumb-item">Permission</li>
+                    </ol>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table table-striped" id="collectionTable">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Created</th>
-                            <th>Action</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($data as $permission)
-                        <tr>
-                            <td>{{ $permission->name }}</td>
-                            <td>{{ $permission->created_at }}</td>
-                            <td>
-                                <a href="{{ route('admin.permissions.permission-edit', encrypt($permission->id)) }}"
-                                    class="btn btn-sm btn-secondary">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <form action="{{ route('admin.permissions.permission-delete', encrypt($permission->id)) }}" method="POST" onclick="confirm('Are you sure')">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="4" class="text-center bg-danger">Permission not created</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row table-resposive">
+                <div class="col-md-12">
+                    @can('permission-create')
+                    <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.permissions.permission-create') }}">+ Create</a>
+                    @endcan
+                    <table class="table table-striped table-bordered" id="feedbcktbl">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Created</th>
+                                <th>Action</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data as $key => $permission)
+                            <tr>
+
+                                <td>{{ $permission->name }}</td>
+                                <td>{{ $permission->created_at }}</td>
+
+
+                                <td class="text-center">
+                                    @can('permission-edit')
+
+                                    <a href="{{ route('admin.permissions.permission-edit', encrypt($permission->id)) }}" title="Edit"><i class="fas fa-edit"></i></a>
+                                    @endcan
+                                    &nbsp;
+                                    @can('permission-delete')
+                                    <a href="javascript:void(0);"
+                                        onclick="delete_status('{{ base64_encode($permission->id) }}', 'permissions', 'D')"
+                                        title="Delete"><i class="text-danger fas fa-trash"></i></a>
+                                    @endcan
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{ $data->appends(Request::except('page'))->links('pagination::bootstrap-5') }}
+
+
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
-
-
 @endsection
 @push('script')
 <script>
-    $(function() {
-        $('#collectionTable').DataTable({
-            "paging": true,
-            "searching": true,
-            "ordering": true,
-            "responsive": true,
+    function delete_status(rowid, tbl, status) {
+        $.confirm({
+            title: "Are you sure?",
+            content: "Do you want to Delete this?",
+            type: "red",
+            typeAnimated: true,
+            buttons: {
+                ok: {
+                    text: "Yes",
+                    btnClass: "btn-red",
+                    action: function() {
+                        $.ajax({
+                            url: "{{ route('admin.permissions.delete') }}",
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                rowid: rowid,
+                                status: status,
+                                tbl: tbl,
+                            },
+                            type: "POST",
+                            success: function(res) {
+                                if (res.code == "200") {
+                                    toastr.success(res.msg);
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 3000);
+                                }
+                            },
+                            error: function(err) {
+                                console.log(err);
+                            },
+                        });
+                    },
+                },
+                cancel: {
+                    text: "No",
+                },
+            },
         });
-    });
+    }
+    setTimeout(() => {
+        $('.error').hide();
+    }, 4500);
 </script>
+
+
 @endpush

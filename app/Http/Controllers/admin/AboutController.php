@@ -8,16 +8,27 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Models\AboutModel;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 class AboutController extends Controller
 {
     public function index(Request $request)
     {
+        try {
+            Gate::authorize('about');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $data['pages'] = AboutModel::with('about_to_pages')->where([['status', '!=', 'D']])->orderBy('id', 'desc')->paginate(10);
         return view('admin.panel.about.index', @$data);
     }
     public function create(Request $request)
     {
+        try {
+            Gate::authorize('about-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         return view('admin.panel.about.create');
     }
 
@@ -51,6 +62,11 @@ class AboutController extends Controller
     }
     public function editAbout(Request $request, $id)
     {
+        try {
+            Gate::authorize('about-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
 
         $id = base64_decode($id);
         $data['pages'] = AboutModel::with('about_to_pages')->where('id', $id)->first();

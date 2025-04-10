@@ -8,6 +8,8 @@ use App\Models\ConstructionTypeModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class ConstructionTypeController extends Controller
 {
@@ -17,6 +19,12 @@ class ConstructionTypeController extends Controller
      */
     public function index()
     {
+
+        try {
+            Gate::authorize('constructor');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $data['constructors'] = ConstructionTypeModel::where([['status', '!=', 'D']])->latest()->paginate(10);
         return view('admin.panel.constructor.index', @$data);
     }
@@ -26,6 +34,12 @@ class ConstructionTypeController extends Controller
      */
     public function create()
     {
+        try {
+            Gate::authorize('constructor-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
+
         return view('admin.panel.constructor.create');
     }
 
@@ -54,6 +68,11 @@ class ConstructionTypeController extends Controller
      */
     public function edit(string $id)
     {
+        try {
+            Gate::authorize('constructor-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
 
         $id = base64_decode($id);
         $data = ConstructionTypeModel::where([['id', '=', $id]])->first();
@@ -90,6 +109,11 @@ class ConstructionTypeController extends Controller
      */
     public function delete(Request $request)
     {
+        try {
+            Gate::authorize('constructor-delete');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         if ($request->tbl != '') {
             $rowid = ($request->rowid != null) ? base64_decode($request->rowid) : null;
             if ($rowid != null) :

@@ -49,8 +49,10 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-md-12 pull-right">
+                    @can('content-create')
                     <a class="btn btn-success btn-sm add-btn pull-right"
                         href="{{ route('admin.content.content_create') }}">+ Create Content</a>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -84,26 +86,17 @@
                                         class="{{ $content->status == 'A' ? 'text-success' : 'text-warning' }}">{{ $content->status == 'A' ? 'Active' : 'Inactive' }}</span>
                                 </td>
 
-
                                 <td class="text-center">
-                                    @if ($content->status == 'A')
-                                    <a href="javascript:void(0);"
-                                        onclick="changeStatus('{{ base64_encode($content->id) }}', 'content_models', 'I')"
-                                        title="Change to Inactive"><i
-                                            class="text-success fas fa-toggle-on"></i></a>
-                                    @else
-                                    <a href="javascript:void(0);"
-                                        onclick="changeStatus('{{ base64_encode($content->id) }}', 'content_models', 'A')"
-                                        title="Change to Active"><i
-                                            class="text-danger fas fa-toggle-off"></i></a>
-                                    @endif
-                                    &nbsp;
+                                    @can('content-edit')
                                     <a href="editContent/{{ base64_encode($content->id) }}" title="Edit"><i
                                             class="fas fa-edit"></i></a>
+                                    @endcan
                                     &nbsp;
+                                    @can('content-delete')
                                     <a href="javascript:void(0);"
                                         onclick="delete_status('{{ base64_encode($content->id) }}', 'content_models', 'D')"
                                         title="Delete"><i class="text-danger fas fa-trash"></i></a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class HowItWorkController extends Controller
 {
@@ -18,6 +19,11 @@ class HowItWorkController extends Controller
      */
     public function index()
     {
+        try {
+            Gate::authorize('how_it_work');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
 
         $data['how_it_works'] = HowItWorkModel::where([['status', '!=', 'D']])->latest()->paginate(10);
         return view('admin.panel.how_it_work.index', @$data);
@@ -28,6 +34,11 @@ class HowItWorkController extends Controller
      */
     public function create()
     {
+        try {
+            Gate::authorize('how_it_work-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         return view('admin.panel.how_it_work.create');
     }
 
@@ -86,6 +97,11 @@ class HowItWorkController extends Controller
      */
     public function edit(string $id)
     {
+        try {
+            Gate::authorize('how_it_work-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
 
         $id = base64_decode($id);
         $data = HowItWorkModel::where([['id', '=', $id]])->first();
@@ -139,6 +155,11 @@ class HowItWorkController extends Controller
      */
     public function delete(Request $request)
     {
+        try {
+            Gate::authorize('how_it_work-delete');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         if ($request->tbl != '') {
             $rowid = ($request->rowid != null) ? base64_decode($request->rowid) : null;
             if ($rowid != null) :

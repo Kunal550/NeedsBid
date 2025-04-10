@@ -71,8 +71,6 @@
                             </label>
                         </div>
                         @endforeach
-
-
                     </div>
                     @error('permissions')
                     <span class="invalid-feedback d-block" role="alert">

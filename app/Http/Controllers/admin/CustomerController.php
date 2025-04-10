@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class CustomerController extends Controller
 {
@@ -16,6 +18,12 @@ class CustomerController extends Controller
 
     public function index(Request $request)
     {
+        try {
+            Gate::authorize('user');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
+
         $data['customers'] = User::where([['status', '!=', 'D'], ['user_type_id', '!=', 1]])->latest()->paginate(10);
         $data['roles'] = Role::all();
         return view('admin.panel.user.index', $data);
@@ -23,11 +31,17 @@ class CustomerController extends Controller
 
     public function create()
     {
+
+        try {
+            Gate::authorize('user-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $roles = Role::all();
         return view('admin.panel.user.create', compact('roles'));
     }
 
-    
+
 
     public function store(Request $request)
     {
@@ -53,7 +67,11 @@ class CustomerController extends Controller
 
     public function editUser($id)
     {
-
+        try {
+            Gate::authorize('user-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $id = base64_decode($id);
         $roles = Role::all();
         $user = User::with('roles')->where([['id', '=', $id]])->first();
@@ -87,7 +105,11 @@ class CustomerController extends Controller
 
     public function delete(Request $request)
     {
-
+        try {
+            Gate::authorize('user-delete');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         if ($request->tbl != '') {
             $rowid = ($request->rowid != null) ? base64_decode($request->rowid) : null;
             if ($rowid != null) :

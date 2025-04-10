@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class TestiMonialWorkController extends Controller
 {
@@ -17,6 +19,11 @@ class TestiMonialWorkController extends Controller
      */
     public function index()
     {
+        try {
+            Gate::authorize('testimonial');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $data['testimonials'] = TestimonialModel::where([['status', '!=', 'D']])->latest()->paginate(10);
         return view('admin.panel.testimonial.index', @$data);
     }
@@ -26,6 +33,11 @@ class TestiMonialWorkController extends Controller
      */
     public function create()
     {
+        try {
+            Gate::authorize('testimonial-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         return view('admin.panel.testimonial.create');
     }
 
@@ -87,6 +99,11 @@ class TestiMonialWorkController extends Controller
      */
     public function edit($id)
     {
+        try {
+            Gate::authorize('testimonial-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $id = base64_decode($id);
         $data = TestimonialModel::where([['id', '=', $id]])->first();
         return view('admin.panel.testimonial.edit', compact('data'));
@@ -123,7 +140,7 @@ class TestiMonialWorkController extends Controller
                 $filename = '';
             }
 
-            TestimonialModel::where('id',base64_decode($request->test_id))
+            TestimonialModel::where('id', base64_decode($request->test_id))
                 ->update([
                     'name' => $request->testimonial_name,
                     'slug' => Str::slug($request->testimonial_name),
@@ -143,6 +160,11 @@ class TestiMonialWorkController extends Controller
      */
     public function delete(Request $request)
     {
+        try {
+            Gate::authorize('testimonial-delete');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         if ($request->tbl != '') {
             $rowid = ($request->rowid != null) ? base64_decode($request->rowid) : null;
             if ($rowid != null) :

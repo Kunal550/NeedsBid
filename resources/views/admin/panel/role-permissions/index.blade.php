@@ -50,7 +50,10 @@
             <div class="card-header">
                 <h3 class="card-title">Roles</h3>
                 <div class="card-tools">
+                    @can('role-permission-create')
                     <a href="{{ route('admin.role-permissions.create') }}" class="btn btn-sm btn-primary">Add</a>
+                    @endcan
+
                 </div>
             </div>
             <div class="card-body">
@@ -73,12 +76,19 @@
                                 @endforeach
                             </td>
                             <td>
+                                @can('role-permission-edit')
+
                                 <a href="{{ route('admin.role-permissions.edit', $role->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                @endcan
+                                @can('role-permission-delete')
+
                                 <form action="{{ route('admin.role-permissions.delete', $role->id) }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">Clear All</button>
                                 </form>
+                                @endcan
+
                             </td>
                         </tr>
                         @endforeach

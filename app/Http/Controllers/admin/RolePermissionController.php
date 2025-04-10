@@ -7,15 +7,20 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class RolePermissionController extends Controller
 {
     public function index()
     {
-        Gate::authorize('role');
+        try {
+            Gate::authorize('role-permission');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $roles = Role::with('permissions')->get();
         $permissions = Permission::all();
-        
+
         return view('admin.panel.role-permissions.index', compact('roles', 'permissions'));
     }
 
@@ -24,9 +29,15 @@ class RolePermissionController extends Controller
      */
     public function create()
     {
+        try {
+            Gate::authorize('role-permission-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
+        
         $roles = Role::all();
         $permissions = Permission::all();
-        
+
         return view('admin.panel.role-permissions.create', compact('roles', 'permissions'));
     }
 
@@ -43,23 +54,30 @@ class RolePermissionController extends Controller
 
         $role = Role::findOrFail($request->role_id);
         $permissions = Permission::whereIn('id', $request->permissions)->get();
-        
+
         $role->syncPermissions($permissions);
 
         return redirect()->route('admin.role-permissions.index')
             ->with('success', 'Permissions assigned to role successfully.');
     }
 
-    
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
+        
+        try {
+            Gate::authorize('role-permission-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
+
         $role = Role::with('permissions')->findOrFail($id);
         $permissions = Permission::all();
-        
+
         return view('admin.panel.role-permissions.edit', compact('role', 'permissions'));
     }
 
@@ -75,7 +93,7 @@ class RolePermissionController extends Controller
 
         $role = Role::findOrFail($id);
         $permissions = Permission::whereIn('id', $request->permissions)->get();
-        
+
         $role->syncPermissions($permissions);
 
         return redirect()->route('admin.role-permissions.list')
@@ -87,6 +105,12 @@ class RolePermissionController extends Controller
      */
     public function destroy(string $id)
     {
+        
+        try {
+            Gate::authorize('role-permission-delete');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $role = Role::findOrFail($id);
         $role->syncPermissions([]);
 

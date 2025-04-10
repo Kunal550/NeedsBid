@@ -61,7 +61,8 @@ Route::middleware(['auth'])->group(function () {
         Route::match(['GET', 'POST'], '/permission-create', [PermissionController::class, "create"])->name('permission-create');
         Route::match(['GET', 'POST'], '/permission-store', [PermissionController::class, 'store'])->name('permission-store');
         Route::match(['GET', 'POST'], '/permission-edit/{id}', [PermissionController::class, "edit"])->name('permission-edit');
-        Route::delete('/permission-delete/{id}', [PermissionController::class, 'destroy'])->name('permission-delete');
+        // Route::delete('/permission-delete/{id}', [PermissionController::class, 'destroy'])->name('permission-delete');
+        Route::match(['GET', 'POST'], '/delete', [PermissionController::class, 'destroy'])->name('delete');
     });
 
     #role-permissions
@@ -183,14 +184,6 @@ Route::middleware(['auth'])->group(function () {
     #Review
     Route::match(['GET', 'POST'], 'review', [ReviewController::class, 'index'])->name('review');
     Route::get('review-get/{rowid?}', [ReviewController::class, 'getsinglerow'])->name('review.get');
-
-
-
-    #State
-    // Route::match(['GET', 'POST'], 'states', [StatesController::class, 'index'])->name('states');
-    // Route::get('states-get/{rowid?}', [StatesController::class, 'getsinglerow'])->name('states.get');
-
-
 
 
 

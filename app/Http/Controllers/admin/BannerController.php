@@ -9,22 +9,32 @@ use Carbon\Carbon;
 use App\Models\Banner;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Spatie\Permission\Models\Permission;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class BannerController extends Controller
 {
 
-   
+
     public function index(Request $request)
     {
+        try {
+            Gate::authorize('banner');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $data['banner'] = Banner::where([['status', '!=', 'D']])->orderBy('id', 'desc')->paginate(10);
         return view('admin.panel.banner.index', @$data);
     }
 
     public function create(Request $request)
     {
-        
+        try {
+            Gate::authorize('banner-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
+
         return view('admin.panel.banner.create');
     }
 
@@ -54,6 +64,11 @@ class BannerController extends Controller
 
     public function editBanner(Request $request, $id)
     {
+        try {
+            Gate::authorize('banner-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $id = base64_decode($id);
         $data['banner'] = Banner::where('id', $id)->first();
         return view('admin.panel.banner.edit', $data);
@@ -87,6 +102,11 @@ class BannerController extends Controller
 
     public function deletebanner(Request $request)
     {
+        try {
+            Gate::authorize('banner-delete');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
 
         if ($request->tbl != '') {
             $rowid = ($request->rowid != null) ? base64_decode($request->rowid) : null;
@@ -100,5 +120,4 @@ class BannerController extends Controller
         }
         return response()->json(['code' => 500, 'msg' => 'Table value required.', 'data' => '']);
     }
-
 }

@@ -65,7 +65,9 @@
         <div class="container-fluid">
             <div class="row table-resposive">
                 <div class="col-md-12">
-                <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.cms.feedback.create') }}">+ Create</a>
+                    @can('feedback-create')
+                    <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.cms.feedback.create') }}">+ Create</a>
+                    @endcan
 
                     <table class="table table-striped table-bordered" id="feedbcktbl">
                         <thead>
@@ -90,13 +92,18 @@
                                 </td>
 
                                 <td class="text-center">
-                                    
+                                    @can('feedback-edit')
                                     <a href="edit/{{ base64_encode($feedback->id) }}" title="Edit"><i class="fas fa-edit"></i></a>
+                                    @endcan
+
                                     &nbsp;
+                                    @can('feedback-delete')
                                     <a href="javascript:void(0);"
                                         onclick="delete_status('{{ base64_encode($feedback->id) }}', 'customer_feedback_models', 'D')"
                                         title="Delete"><i
                                             class="text-danger fas fa-trash"></i></a>
+                                    @endcan
+
                                 </td>
                             </tr>
                             @endforeach
@@ -114,7 +121,6 @@
 @endsection
 @push('script')
 <script>
-
     function delete_status(rowid, tbl, status) {
         $.confirm({
             title: "Are you sure?",

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 class ContractorTradeController extends Controller
 {
 
@@ -17,6 +18,11 @@ class ContractorTradeController extends Controller
      */
     public function index()
     {
+        try {
+            Gate::authorize('contractor');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $data['contractors'] = ContactorModel::where([['status', '!=', 'D']])->latest()->paginate(10);
         return view('admin.panel.contractor.index', @$data);
     }
@@ -26,6 +32,11 @@ class ContractorTradeController extends Controller
      */
     public function create()
     {
+        try {
+            Gate::authorize('contractor-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         return view('admin.panel.contractor.create');
     }
 
@@ -56,6 +67,11 @@ class ContractorTradeController extends Controller
      */
     public function edit(string $id)
     {
+        try {
+            Gate::authorize('contractor-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
 
         $id = base64_decode($id);
         $data = ContactorModel::where([['id', '=', $id]])->first();
@@ -92,6 +108,11 @@ class ContractorTradeController extends Controller
      */
     public function delete(Request $request)
     {
+        try {
+            Gate::authorize('contractor-delete');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         if ($request->tbl != '') {
             $rowid = ($request->rowid != null) ? base64_decode($request->rowid) : null;
             if ($rowid != null) :

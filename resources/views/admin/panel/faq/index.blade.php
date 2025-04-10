@@ -74,8 +74,9 @@
         <div class="container-fluid">
             <div class="row table-resposive">
                 <div class="col-md-12">
-                <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.cms.faq.create') }}">+ Create</a>
-
+                    @can('faq-create')
+                    <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.cms.faq.create') }}">+ Create</a>
+                    @endcan
                     <table class="table table-striped table-bordered" id="faqtbl">
                         <thead>
                             <tr>
@@ -93,13 +94,14 @@
                                         class="{{ $faq_detail->status == 'A' ? 'text-success' : 'text-warning' }}">{{ $faq_detail->status == 'A' ? 'Active' : 'Inactive' }}</span>
                                 </td>
 
-
                                 <td class="text-center">
-
-                                    <a href="edit/{{ base64_encode($faq_detail->id) }}"  title="Edit"><i class="fas fa-edit"></i></a>
-
+                                    @can('faq-edit')
+                                    <a href="edit/{{ base64_encode($faq_detail->id) }}" title="Edit"><i class="fas fa-edit"></i></a>
+                                    @endcan
+                                    @can('faq-delete')
                                     <a href="javascript:void(0);" onclick="delete_status('{{ base64_encode($faq_detail->id) }}', 'faq_models', 'D')"
                                         title="Delete"><i class="text-danger fas fa-trash"></i></a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

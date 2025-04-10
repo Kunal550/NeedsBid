@@ -44,7 +44,10 @@
         <div class="container-fluid">
             <div class="row table-resposive">
                 <div class="col-md-12">
-                <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.constructor-type.create') }}">+ Create</a>
+                    @can('constructor-create')
+                    <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.constructor-type.create') }}">+ Create</a>
+                    @endcan
+
                     <table class="table table-striped table-bordered" id="constructortbl">
                         <thead>
                             <tr>
@@ -61,10 +64,13 @@
                                 <td class="text-center"><span class="{{ $constructor->status == 'A' ? 'text-success' : 'text-warning' }}">{{ $constructor->status == 'A' ? 'Active' : 'Inactive' }}</span>
                                 </td>
                                 <td class="text-center">
-                                   
+                                    @can('constructor-edit')
                                     <a href="edit/{{ base64_encode($constructor->id) }}" title="Edit"><i class="fas fa-edit"></i></a>
+                                    @endcan
                                     &nbsp;
+                                    @can('constructor-delete')
                                     <a href="javascript:void(0);" onclick="delete_status('{{ base64_encode($constructor->id) }}', 'construction_type_model', 'D')" title="Delete"><i class="text-danger fas fa-trash"></i></a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

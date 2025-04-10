@@ -11,6 +11,7 @@
                 </li>
 
                 <!-- Customer Pages -->
+                @can('user')
                 <li class="nav-item {{ Request::is('admin/users/*') ? 'menu-open' : '' }}">
                     <a href="{{ route('admin.users.list') }}"
                         class="nav-link {{ Request::is('admin/users/list') ? 'active' : '' }}">
@@ -18,17 +19,18 @@
                         <p>Users</p>
                     </a>
                 </li>
-
+                @endcan
                 <!-- Role Management -->
-
+                @can('role')
                 <li class="nav-item {{ Request::is('admin/roles') ? 'menu-open' : '' }}">
                     <a href="{{ route('admin.roles.list') }}" class="nav-link {{ Request::is('admin/roles/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user-cog"></i>
                         <p>Role</p>
                     </a>
                 </li>
-
+                @endcan
                 <!-- Permission Management -->
+                @can('permission')
                 <li class="nav-item {{ Request::is('admin/permissions') ? 'menu-open' : '' }}">
                     <a href="{{ route('admin.permissions.list') }}"
                         class="nav-link {{ Request::is('admin/permissions/*') ? 'active' : '' }}">
@@ -36,8 +38,8 @@
                         <p>Permission</p>
                     </a>
                 </li>
-
-
+                @endcan
+                @can('role-permission')
                 <li class="nav-item {{ Request::is('admin/role-permissions') ? 'menu-open' : '' }}">
                     <a href="{{ route('admin.role-permissions.list') }}"
                         class="nav-link {{ Request::is('admin/role-permissions/*') ? 'active' : '' }}">
@@ -45,10 +47,10 @@
                         <p>Role Permission</p>
                     </a>
                 </li>
-
+                @endcan
 
                 <!-- Banner Management -->
-
+                @can('banner')
                 <li class="nav-item {{ Request::is('admin/banner') ? 'menu-open' : '' }}">
                     <a href="{{ route('admin.banner.banner') }}"
                         class="nav-link {{ Request::is('admin/banner/*') ? 'active' : '' }}">
@@ -56,13 +58,14 @@
                         <p>Banner</p>
                     </a>
                 </li>
-
+                @endcan
                 <!-- CMS Pages -->
                 <li class="nav-item {{ Request::is('admin/cms/*') ? 'menu-open' : '' }}">
                     <a href="javascript:void(0);" class="nav-link {{ Request::is('admin/cms/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>CMS <i class="fas fa-angle-left right"></i></p>
                     </a>
+                    @can('page')
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('admin.cms.pages.list') }}" class="nav-link {{ Request::is('admin/cms/pages/list') ? 'active' : '' }}">
@@ -70,6 +73,9 @@
                                 <p>Page</p>
                             </a>
                         </li>
+                        @endcan
+
+                        @can('how_it_work')
                         <li class="nav-item">
                             <a href="{{ route('admin.cms.how_it_work.list') }}"
                                 class="nav-link {{ Request::is('admin/cms/how_it_work/list') ? 'active' : '' }}">
@@ -77,7 +83,9 @@
                                 <p>How It Works</p>
                             </a>
                         </li>
+                        @endcan
 
+                        @can('testimonial')
                         <li class="nav-item">
                             <a href="{{ route('admin.cms.testimonial.list') }}"
                                 class="nav-link {{ Request::is('admin/cms/testimonial/list') ? 'active' : '' }}">
@@ -85,7 +93,8 @@
                                 <p>Testimonial</p>
                             </a>
                         </li>
-
+                        @endcan
+                        @can('blog')
                         <li class="nav-item">
                             <a href="{{ route('admin.cms.blog.list') }}"
                                 class="nav-link {{ Request::is('admin/cms/blog/list') ? 'active' : '' }}">
@@ -93,7 +102,8 @@
                                 <p>Blog</p>
                             </a>
                         </li>
-
+                        @endcan
+                        @can('faq')
                         <li class="nav-item">
                             <a href="{{ route('admin.cms.faq.list') }}"
                                 class="nav-link {{ Request::is('admin/cms/faq/list') ? 'active' : '' }}">
@@ -101,7 +111,8 @@
                                 <p>FAQ</p>
                             </a>
                         </li>
-
+                        @endcan
+                        @can('feedback')
                         <li class="nav-item">
                             <a href="{{ route('admin.cms.feedback.list') }}"
                                 class="nav-link {{ Request::is('admin/cms/feedback/list') ? 'active' : '' }}">
@@ -109,7 +120,7 @@
                                 <p>Customer Feedback</p>
                             </a>
                         </li>
-                        
+                        @endcan
                     </ul>
                 </li>
 
@@ -121,6 +132,7 @@
                         <p>Projects<i class="fas fa-angle-left right"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @can('project-category')
                         <li class="nav-item">
                             <a href="{{ route('admin.project-category.list') }}"
                                 class="nav-link {{ Request::is('admin/project-category/list') ? 'active' : '' }}">
@@ -128,6 +140,8 @@
                                 <p>Project Category</p>
                             </a>
                         </li>
+                        @endcan
+                        @can('project')
                         <li class="nav-item">
                             <a href="{{ route('admin.projects.project') }}"
                                 class="nav-link {{ Request::is('admin/projects/project') ? 'active' : '' }}">
@@ -135,13 +149,15 @@
                                 <p>Projects</p>
                             </a>
                         </li>
-
+                        @endcan
                     </ul>
                 </li>
 
 
 
                 <!-- Contractor Pages -->
+
+                @can('contractor')
                 <li class="nav-item {{ Request::is('admin/contractor/*') ? 'menu-open' : '' }}">
                     <a href="{{ route('admin.contractor.list') }}"
                         class="nav-link {{ Request::is('admin/contractor.list') ? 'active' : '' }}">
@@ -149,8 +165,10 @@
                         <p>Contractor Trade</p>
                     </a>
                 </li>
+                @endcan
 
                 <!-- Construction Pages -->
+                @can('constructor')
                 <li class="nav-item {{ Request::is('admin/constructor-type/*') ? 'menu-open' : '' }}">
                     <a href="{{ route('admin.constructor-type.list') }}"
                         class="nav-link {{ Request::is('admin.constructor-type.list') ? 'active' : '' }}">
@@ -158,10 +176,11 @@
                         <p>Construction Type</p>
                     </a>
                 </li>
+                @endcan
 
 
                 <!-- State Pages -->
-
+                @can('state')
                 <li class="nav-item {{ Request::is('admin/states/*') ? 'menu-open' : '' }}">
                     <a href="{{ route('admin.states.list') }}"
                         class="nav-link {{ Request::is('admin.states.list') ? 'active' : '' }}">
@@ -169,8 +188,9 @@
                         <p>States</p>
                     </a>
                 </li>
+                @endcan
 
-
+                @can('content')
                 <li class="nav-item {{ Request::is('admin/content/list') ? 'menu-open' : '' }}">
                     <a href="{{ route('admin.content.list') }}"
                         class="nav-link {{ Request::is('admin/content/list') ? 'active' : '' }}">
@@ -178,21 +198,10 @@
                         <p>Content</p>
                     </a>
                 </li>
-
-
-                <!-- Review System -->
-
-                {{-- <li class="nav-item {{ Request::is('admin/review') ? 'menu-open' : '' }}">
-                <a href="{{ route('admin.review') }}"
-                    class="nav-link {{ Request::is('admin/review') ? 'active' : '' }}">
-                    <i class="nav-icon far fa-plus-square"></i>
-                    <p>Review</p>
-                </a>
-                </li> --}}
-                <!-- END -->
-
+                @endcan
 
                 <!-- settings  -->
+                @role('admin')
                 <li class="nav-item {{ Request::is('admin/setting') ? 'menu-open' : '' }}">
                     <a href="{{ route('admin.setting') }}"
                         class="nav-link {{ Request::is('admin/setting') ? 'active' : '' }}">
@@ -200,6 +209,7 @@
                         <p>Settings</p>
                     </a>
                 </li>
+                @endrole
 
 
 

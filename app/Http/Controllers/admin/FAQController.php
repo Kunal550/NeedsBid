@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 class FAQController extends Controller
 {
     /**
@@ -16,6 +17,11 @@ class FAQController extends Controller
      */
     public function index()
     {
+        try {
+            Gate::authorize('faq');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
 
         $data['faq_details'] = FaqModel::where([['status', '!=', 'D']])->latest()->paginate(10);
         return view('admin.panel.faq.index', @$data);
@@ -26,6 +32,11 @@ class FAQController extends Controller
      */
     public function create()
     {
+        try {
+            Gate::authorize('faq-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         return view('admin.panel.faq.create');
     }
 
@@ -65,6 +76,11 @@ class FAQController extends Controller
      */
     public function edit(string $id)
     {
+        try {
+            Gate::authorize('faq-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
 
         $id = base64_decode($id);
         $data = FaqModel::where([['id', '=', $id]])->first();
@@ -102,6 +118,11 @@ class FAQController extends Controller
      */
     public function delete(Request $request)
     {
+        try {
+            Gate::authorize('faq-delete');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         if ($request->tbl != '') {
             $rowid = ($request->rowid != null) ? base64_decode($request->rowid) : null;
             if ($rowid != null) :

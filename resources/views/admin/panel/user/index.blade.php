@@ -63,7 +63,9 @@
         <div class="container-fluid">
             <div class="row table-resposive">
                 <div class="col-md-12">
-                <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.users.user-create') }}">+ Create User</a>
+                    @can('user-create')
+                    <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.users.user-create') }}">+ Create User</a>
+                    @endcan
                     <table class="table table-striped table-bordered" id="customertbl">
                         <thead>
                             <tr>
@@ -100,10 +102,15 @@
                                 </td>
 
                                 <td class="text-center">
+                                    @can('user-edit')
                                     <a href="user-edit/{{ base64_encode($customer->id) }}" title="Edit"><i class="fas fa-edit"></i></a>
+                                    @endcan
+
                                     &nbsp;
+                                    @can('user-delete')
                                     <a href="javascript:void(0);"
-                                        onclick="delete_status('{{ base64_encode($customer->id) }}', 'users', 'D')"  title="Delete"><i class="text-danger fas fa-trash"></i></a>
+                                        onclick="delete_status('{{ base64_encode($customer->id) }}', 'users', 'D')" title="Delete"><i class="text-danger fas fa-trash"></i></a>
+                                        @endcan
 
                                 </td>
                             </tr>

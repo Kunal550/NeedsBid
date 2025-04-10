@@ -14,12 +14,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class ProjectController extends Controller
 {
 
     public function index(Request $request)
     {
+        try {
+            Gate::authorize('project');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $data['projects'] = Project::with('project_to_project_category')->where([['status', '!=', 'D']])->latest()->paginate(10);
         $data['project_categories'] = ProjectCategory::where([['status', '!=', 'D']])->get();
         return view('admin.panel.projects.index', @$data);
@@ -27,6 +34,11 @@ class ProjectController extends Controller
 
     public function create(Request $request)
     {
+        try {
+            Gate::authorize('project-create');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $data['project_categories'] = ProjectCategory::where([['status', '!=', 'D']])->get();
         $data['contractors'] = ContactorModel::where([['status', '!=', 'D']])->get();
         $data['constructors'] = ConstructionTypeModel::where([['status', '!=', 'D']])->get();
@@ -46,7 +58,7 @@ class ProjectController extends Controller
             'content' => 'nullable|min:5',
             'image' => 'nullable|image|mimes:webp,png,jpeg,gif,jpg|max:5000',
             'other_file' => 'nullable|mimes:pdf,doc,docx|max:5000'
-            
+
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -87,6 +99,11 @@ class ProjectController extends Controller
 
     public function edit(Request $request, $id)
     {
+        try {
+            Gate::authorize('project-edit');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         $id = base64_decode($id);
         $data['project'] = Project::where('id', $id)->first();
         $data['project_categories'] = ProjectCategory::where([['status', '!=', 'D']])->get();
@@ -161,6 +178,11 @@ class ProjectController extends Controller
 
     public function delete(Request $request)
     {
+        try {
+            Gate::authorize('project-delete');
+        } catch (AuthorizationException $e) {
+            return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access that page.');
+        }
         if ($request->tbl != '') {
             $rowid = ($request->rowid != null) ? base64_decode($request->rowid) : null;
             if ($rowid != null) :
@@ -173,6 +195,4 @@ class ProjectController extends Controller
         }
         return response()->json(['code' => 500, 'msg' => 'Table value required.', 'data' => '']);
     }
-
-   
 }

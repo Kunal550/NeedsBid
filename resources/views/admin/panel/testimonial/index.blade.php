@@ -29,8 +29,6 @@
     .select2-container .select2-selection--single {
         height: 38px;
     }
-
-    
 </style>
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
 @endpush
@@ -65,7 +63,9 @@
         <div class="container-fluid">
             <div class="row table-resposive">
                 <div class="col-md-12">
-                <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.cms.testimonial.create') }}">+ Create</a>
+                    @can('testimonial-create')
+                    <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.cms.testimonial.create') }}">+ Create</a>
+                    @endcan
                     <table class="table table-striped table-bordered" id="testimonialtbl">
                         <thead>
                             <tr>
@@ -89,12 +89,15 @@
                                         class="{{ $testimonial->status == 'A' ? 'text-success' : 'text-warning' }}">{{ $testimonial->status == 'A' ? 'Active' : 'Inactive' }}</span>
                                 </td>
                                 <td class="text-center">
-                                    
-                                    <a href="edit/{{ base64_encode($testimonial->id) }}"  title="Edit"><i class="fas fa-edit"></i></a>
+                                    @can('testimonial-edit')
+                                    <a href="edit/{{ base64_encode($testimonial->id) }}" title="Edit"><i class="fas fa-edit"></i></a>
+                                    @endcan
                                     &nbsp;
+                                    @can('testimonial-delete')
                                     <a href="javascript:void(0);"
                                         onclick="delete_status('{{ base64_encode($testimonial->id) }}', 'testimonials', 'D')"
                                         title="Delete"><i class="text-danger fas fa-trash"></i></a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
@@ -108,7 +111,6 @@
         </div>
     </div>
 </div>
-
 
 @endsection
 @push('script')

@@ -64,7 +64,10 @@
         <div class="container-fluid">
             <div class="row table-resposive">
                 <div class="col-md-12">
+                    @can('project-create')
                     <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.projects.project-create') }}">+ Create Project</a>
+                    @endcan
+
                     <table class="table table-striped table-bordered" id="projecttbl">
                         <thead>
                             <tr>
@@ -78,7 +81,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($projects as $key => $project)
+                            @foreach ($projects as $key => $project)
                             <tr>
                                 <td class="text-center"><img src="{{ $project->avatar }}" class="img" alt=""></td>
                                 <td>{{ ucwords($project->title) }}</td>
@@ -90,12 +93,17 @@
                                 <td class="text-center"><span class="{{ $project->status == 'A' ? 'text-success' : 'text-warning' }}">{{ $project->status == 'A' ? 'Active' : 'Inactive' }}</span>
                                 </td>
                                 <td class="text-center">
-                                    
+                                    @can('project-edit')
                                     <a href="project-edit/{{ base64_encode($project->id) }}" title="Edit"><i class="fas fa-edit"></i></a>
+                                    @endcan
+
                                     &nbsp;
+                                    @can('project-delete')
                                     <a href="javascript:void(0);"
                                         onclick="delete_status('{{ base64_encode($project->id) }}', 'projects', 'D')"
                                         title="Delete"><i class="text-danger fas fa-trash"></i></a>
+                                    @endcan
+
                                 </td>
                             </tr>
                             @endforeach
@@ -225,7 +233,7 @@
         $('#serviceModal').find('#rowid').val(res.id);
     }
 
-    
+
     setTimeout(() => {
         $('.error').hide();
     }, 4500);

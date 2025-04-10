@@ -49,7 +49,9 @@
             <div class="card-header">
                 <h3 class="card-title">Roles</h3>
                 <div class="card-tools">
+                    @can('role-create')
                     <a href="{{ route('admin.roles.role-create') }}" class="btn btn-sm btn-primary">Add</a>
+                    @endcan
                 </div>
             </div>
             <div class="card-body">
@@ -68,11 +70,14 @@
                             <td>{{ $role->name }}</td>
                             <td>{{ $role->created_at }}</td>
                             <td>
+                                @can('role-edit')
                                 <a href="{{ route('admin.roles.role-edit',encrypt($role->id)) }}" class="btn btn-sm btn-secondary">
                                     <i class="far fa-edit"></i>
                                 </a>
+                                @endcan
                             </td>
                             <td>
+                                @can('role-delete')
                                 <form action="{{ route('admin.roles.role-delete',encrypt($role->id)) }}" method="POST" onclick="confirm('Are you sure')">
                                     @method('DELETE')
                                     @csrf
@@ -80,6 +85,7 @@
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

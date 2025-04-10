@@ -71,7 +71,9 @@
         <div class="container-fluid">
             <div class="row table-resposive">
                 <div class="col-md-12">
+                    @can('how_it_work-create')
                     <a class="btn btn-success btn-sm add-btn pull-right flotleft-custom" href="{{ route('admin.cms.how_it_work.create') }}">+ Create</a>
+                    @endcan
                     <table class="table table-striped table-bordered" id="how_it_worktbl">
                         <thead>
                             <tr>
@@ -90,13 +92,15 @@
                                         class="{{ $how_it_work->status == 'A' ? 'text-success' : 'text-warning' }}">{{ $how_it_work->status == 'A' ? 'Active' : 'Inactive' }}</span>
                                 </td>
                                 <td class="text-center">
+                                    @can('how_it_work-edit')
                                     <a href="edit/{{ base64_encode($how_it_work->id) }}" title="Edit"><i class="fas fa-edit"></i></a>
-                                    
+                                    @endcan
                                     &nbsp;
+                                    @can('how_it_work-delete')
                                     <a href="javascript:void(0);"
                                         onclick="delete_status('{{ base64_encode($how_it_work->id) }}', 'how_it_work_models', 'D')"
-                                        title="Delete"><i
-                                            class="text-danger fas fa-trash"></i></a>
+                                        title="Delete"><i class="text-danger fas fa-trash"></i></a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

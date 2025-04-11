@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ env('APP_NAME') }} | @yield('page_title')</title>
@@ -33,8 +34,9 @@
             z-index: 9999;
         }
     </style>
-  </head>
-  <body class="hold-transition login-page">
+</head>
+
+<body class="hold-transition login-page">
     <div id="myDiv">
         <img style="height:180px;" src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/bc0c6b69321565.5b7d0cbe723b5.gif" alt="AdminLTELogo">
     </div>
@@ -45,16 +47,18 @@
     <!-- AdminLTE App -->
     <script src="{{ asset('public/admin/dist/js/adminlte.min.js') }}"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#myDiv').hide();
-        });         
-        function loader(loadtype){
-            if(loadtype == 'show'){
+        });
+
+        function loader(loadtype) {
+            if (loadtype == 'show') {
                 $('#myDiv').show();
-            }else{
+            } else {
                 $('#myDiv').hide();
             }
         }
     </script>
-  </body>
+</body>
+
 </html>

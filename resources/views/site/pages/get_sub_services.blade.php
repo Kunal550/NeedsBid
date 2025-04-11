@@ -16,20 +16,20 @@
     </div>
 </section>
 <section class="sec-space">
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="pbox">
-                <figure class="pimg"><img src="{{ asset('public/uploads/sub_service/' . $get_services->image) }}" alt=""></figure>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pbox">
+                    <figure class="pimg"><img src="{{ asset('public/uploads/sub_service/' . $get_services->image) }}" alt=""></figure>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="pbox">
-                {!! $get_services->content !!}
-               
+            <div class="col-md-6">
+                <div class="pbox">
+                    {!! $get_services->content !!}
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 </section>
 @endsection

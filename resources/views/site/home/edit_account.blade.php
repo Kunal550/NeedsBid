@@ -93,7 +93,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="post_code">Post Code</label>
-                        <input type="text" name="post_code" id="post_code"  maxlength="7" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Enter your Post Code" value="{{ $profile->post_code }}" required>
+                        <input type="text" name="post_code" id="post_code" maxlength="7" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Enter your Post Code" value="{{ $profile->post_code }}" required>
                         @if ($errors->has('post_code'))
                         <span class="error"><small>{{ ucwords($errors->first('post_code')) }}</small></span>
                         @endif
@@ -123,8 +123,8 @@
                         <span class="error"><small>{{ ucwords($errors->first('contact_details')) }}</small></span>
                         @endif
                     </div>
-                    
-                    
+
+
                     <div class="form-group col-md-6">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Update Account</button>

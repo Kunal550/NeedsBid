@@ -16,20 +16,20 @@
     </div>
 </section>
 <section class="sec-space">
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="pbox">
-                <figure class="pimg"><img src="{{ $project_details->avatar }}" alt=""></figure>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pbox">
+                    <figure class="pimg"><img src="{{ $project_details->avatar }}" alt=""></figure>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="pbox">
-                {!! $project_details->content !!}
-               
+            <div class="col-md-6">
+                <div class="pbox">
+                    {!! $project_details->content !!}
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 </section>
 @endsection

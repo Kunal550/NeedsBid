@@ -16,15 +16,15 @@
     </div>
 </section>
 <section class="sec-space">
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="pbox">
-                {!! $view_details->description !!}
-               
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pbox">
+                    {!! $view_details->description !!}
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 </section>
 @endsection

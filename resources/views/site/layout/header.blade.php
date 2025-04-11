@@ -55,18 +55,22 @@ $setting = App\Models\Setting::first();
                     </div>
 
                     <div class="header-bottom-left">
-                            <ul id="menu-menu-1" class="">
-                                <li id="" class=""><a href="{{ route('/') }}" aria-current="page">Home</a></li>
-                                <li id="" class=""><a href="{{ route('about-us') }}">About Us</a></li>
-                                <li id="" class=""><a href="{{ route('contact-us') }}">Contact Us</a></li>
-                                <li id="" class=""><a href="{{route('contractors')}}">Find Contactors</a></li>
-                                <li id="" class=""><a href="{{route('find-project')}} ">Find Projects</a></li>
-                            </ul>
+                        <ul id="menu-menu-1" class="">
+                            <li id="" class=""><a href="{{ route('/') }}" aria-current="page">Home</a></li>
+                            <li id="" class=""><a href="{{ route('about-us') }}">About Us</a></li>
+                            <li id="" class=""><a href="{{ route('contact-us') }}">Contact Us</a></li>
+                            <li id="" class=""><a href="{{route('contractors')}}">Find Contactors</a></li>
+                            <li id="" class=""><a href="{{route('find-project')}} ">Find Projects</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="login-button">
+                        @if(auth()->check())
+                        <a href="{{ route('profile') }}"><span>Profile</span></a>
+                        @else
                         <a href="{{ route('login_user') }}"><span>Login</span></a>
+                        @endif
                     </div>
                 </div>
             </div>

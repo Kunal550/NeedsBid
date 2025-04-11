@@ -50,8 +50,10 @@
                         <div class="inputmain">
                             <input type="password" id="new_password" minlength="6" maxlength="15" class="form-control"
                                 name="new_password">
-                            <a class="i_icon" href="javascript:void(0);" onclick="NewPassword()"><i
-                                    class="fa fa-eye"></i></a>
+                            <button type="button" class="hide-icon btn btn-outline-secondary" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+
                         </div>
                         @if ($errors->has('new_password'))
                         <span class="error"><small>{{ ucwords($errors->first('new_password')) }}</small></span>
@@ -62,10 +64,10 @@
                         <div class="inputmain">
                             <input type="password" id="confirm_password" minlength="6" maxlength="15"
                                 class="form-control" name="confirm_password">
+                            <button type="button" class="hide-icon btn btn-outline-secondary" id="togglePassword1">
+                                <i class="fas fa-eye"></i>
+                            </button>
 
-                            <a href="javascript:void(0);" class="i_icon" onclick="ConfirmPassword()">
-                                <i class="fa fa-eye"></i>
-                            </a>
                         </div>
                         @if ($errors->has('confirm_password'))
                         <span class="error"><small>{{ ucwords($errors->first('confirm_password')) }}</small></span>
@@ -116,33 +118,31 @@
     });
 
 
-    $('#pass_change').click(function(e) {
-        if ($(this).prop('checked') == true) {
-            $('.showPass').show();
+    $('#togglePassword').on('click', function() {
+        const passwordField = $('#new_password');
+        const icon = $(this).find('i');
+
+        if (passwordField.attr('type') === 'password') {
+            passwordField.attr('type', 'text');
+            icon.removeClass('fa-eye').addClass('fa-eye-slash');
         } else {
-            $('.showPass').hide();
-
+            passwordField.attr('type', 'password');
+            icon.removeClass('fa-eye-slash').addClass('fa-eye');
         }
-
     });
 
-    function NewPassword() {
-        var x = document.getElementById("new_password");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
-        }
-    }
+    $('#togglePassword1').on('click', function() {
+        const passwordField = $('#confirm_password');
+        const icon = $(this).find('i');
 
-    function ConfirmPassword() {
-        var x = document.getElementById("confirm_password");
-        if (x.type === "password") {
-            x.type = "text";
+        if (passwordField.attr('type') === 'password') {
+            passwordField.attr('type', 'text');
+            icon.removeClass('fa-eye').addClass('fa-eye-slash');
         } else {
-            x.type = "password";
+            passwordField.attr('type', 'password');
+            icon.removeClass('fa-eye-slash').addClass('fa-eye');
         }
-    }
+    });
 
     setTimeout(() => {
         $('.error').hide();

@@ -2,8 +2,8 @@
 @section('content')
 <main>
     <!-- Banner -->
-    <section class="no-overlay innerbanner"> 
-        <figure class="innerbanner-img"><img src="{{asset('public/front_end/images/service-bg.jpg')}}" alt=""></figure> 
+    <section class="no-overlay innerbanner">
+        <figure class="innerbanner-img"><img src="{{asset('public/front_end/images/service-bg.jpg')}}" alt=""></figure>
     </section>
     <!-- Other Services -->
     <section class="sec-space bg-gray other-ser-head">
@@ -26,7 +26,7 @@
                     <div class="col-md-6 img-col">
                         <img src="{{asset('public/uploads/service/'.$otherservice->image)}}" alt="">
                     </div>
-                    <div class="col-md-6 text-col ml-lg-auto"> 
+                    <div class="col-md-6 text-col ml-lg-auto">
                         <div class="repeat-text-box d-flex align-items-center flex-wrap">
                             <div class="repeat-wrap">
                                 <h3>{{$otherservice->name}}</h3>

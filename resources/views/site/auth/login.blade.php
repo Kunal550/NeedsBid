@@ -48,7 +48,7 @@
                             <div class="mb-3 position-relative">
                                 <label class="form-label wow bounceInRight">Password</label>
                                 <input class="form-control form-control-lg" id="password" name="password" type="password" placeholder="Enter your Password">
-                               
+
                                 <button type="button" class="hide-icon btn btn-outline-secondary" id="togglePassword">
                                     <i class="fas fa-eye"></i>
                                 </button>
@@ -78,7 +78,6 @@
 
 @push('script')
 <script>
-    
     $(document).ready(function() {
         $('#togglePassword').on('click', function() {
             const passwordField = $('#password');
@@ -94,7 +93,7 @@
             }
         });
     });
-    
+
 
     setTimeout(() => {
         $('.error').hide();

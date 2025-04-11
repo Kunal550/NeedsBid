@@ -17,19 +17,19 @@
 
     <section>
         <div class="container">
-           <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="section-404 text-center">
-                    <h1 class="error">404</h1>
-                    <div class="page">Ooops!!! The page you are looking for is not found</div>
-                    <a class="back-home" href="{{route('/')}}">Back to home</a>
-                </div>    
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="section-404 text-center">
+                        <h1 class="error">404</h1>
+                        <div class="page">Ooops!!! The page you are looking for is not found</div>
+                        <a class="back-home" href="{{route('/')}}">Back to home</a>
+                    </div>
+                </div>
             </div>
-           </div>    
         </div>
     </section>
 
-  
+
     <style>
         /*======================
     404 page

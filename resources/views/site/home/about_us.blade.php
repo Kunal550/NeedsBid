@@ -50,29 +50,25 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="about-con1">
-                                        <h2>150+
-                                            Projects</h2>
+                                        <h2>150+ Projects</h2>
                                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod aliquyam era.</p>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="about-con1">
-                                        <h2>80+
-                                            Projects</h2>
+                                        <h2>80+ Projects</h2>
                                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod aliquyam era.</p>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="about-con1">
-                                        <h2>150+
-                                            Projects</h2>
+                                        <h2>150+ Projects</h2>
                                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod aliquyam era.</p>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="about-con1">
-                                        <h2>80+
-                                            Projects</h2>
+                                        <h2>80+ Projects</h2>
                                         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod aliquyam era.</p>
                                     </div>
                                 </div>

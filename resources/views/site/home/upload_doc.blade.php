@@ -31,9 +31,7 @@
 
     <div class="row">
         <div class="col-md-12">
-
             <h2>Edit Profile</h2>
-
         </div>
         <div class="col-md-4 col-lg-3">
             <div class="left-bar">
@@ -50,7 +48,6 @@
                     <input type="file" name="documents[]" multiple>
                     <button type="submit">Upload</button>
                 </form>
-
 
                 <div class="form-group col-md-6">
                     <div class="d-flex">
@@ -96,13 +93,11 @@
                             },
                             success: function(res) {
                                 if (res.code == "200") {
-
                                     toastr.success(res.msg);
                                     setTimeout(() => {
                                         location.reload();
                                     }, 3000);
 
-                                    
                                 }
                             },
                             error: function(err) {

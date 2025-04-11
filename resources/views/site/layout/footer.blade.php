@@ -1,16 +1,16 @@
 @php
-    $setting = App\Models\Setting::first();
-    $project_categories = App\Models\ProjectCategory::where([['status',  'A']])->get();
+$setting = App\Models\Setting::first();
+$project_categories = App\Models\ProjectCategory::where([['status', 'A']])->get();
 @endphp
 <div class="news-latter-section">
     <h2 class="common-heading text-center wow bounceInRight color-white">Newsletter</h2>
     <p class="news-sub-text1"> {!! $setting->newsletter !!}
     </p>
     <form action="{{ route('news-letter') }}" id="news-letter" method="get">
-    <div class="news-latter-section-one">
-        <input type="email" name="news_letter_email" class="news-search" placeholder="Email" />
-        <input type="submit" class="news-submit-one" />
-    </div>
+        <div class="news-latter-section-one">
+            <input type="email" name="news_letter_email" class="news-search" placeholder="Email" />
+            <input type="submit" class="news-submit-one" />
+        </div>
     </form>
 </div>
 <footer id="colophon" class="site-footer footer-bg common-gap">
@@ -23,24 +23,24 @@
                     </a>
                 </div>
                 <div class="footer-logo-text wow bounceInRight">
-                {!! $setting->about_company !!}
+                    {!! $setting->about_company !!}
                 </div>
                 <div class="social-media-icon wow bounceInRight">
 
-                @if (!empty($setting->fb_link))
-                        <a href="{{ $setting->fb_link }}" target="_blank"><img src="{{ asset('public/uploads/images/facebook-icon1.svg')}}" alt="" /></a>
+                    @if (!empty($setting->fb_link))
+                    <a href="{{ $setting->fb_link }}" target="_blank"><img src="{{ asset('public/uploads/images/facebook-icon1.svg')}}" alt="" /></a>
                     @endif
                     @if (!empty($setting->linkdin_link))
-                        <a href="{{ $setting->linkdin_link }}" target="_blank"><img src="{{ asset('public/uploads/images/ins-1.svg')}}" alt="" /></a>
+                    <a href="{{ $setting->linkdin_link }}" target="_blank"><img src="{{ asset('public/uploads/images/ins-1.svg')}}" alt="" /></a>
                     @endif
                     @if (!empty($setting->twitter_link))
-                        <a href="{{ $setting->twitter_link }}" target="_blank"><img src="{{ asset('public/uploads/images/you-tube2.svg')}}" alt="" /></a>
+                    <a href="{{ $setting->twitter_link }}" target="_blank"><img src="{{ asset('public/uploads/images/you-tube2.svg')}}" alt="" /></a>
                     @endif
                     @if (!empty($setting->insta_link))
-                        <a href="{{ $setting->insta_link }}" target="_blank"><img src="{{ asset('public/uploads/images/ins-1.svg')}}" alt="" /> </a>
+                    <a href="{{ $setting->insta_link }}" target="_blank"><img src="{{ asset('public/uploads/images/ins-1.svg')}}" alt="" /> </a>
                     @endif
                     @if (!empty($setting->you_tube_link))
-                        <a href="{{ $setting->you_tube_link }}" target="_blank"><img src="{{ asset('public/uploads/images/you-tube1.svg')}}" alt="" /> </a>
+                    <a href="{{ $setting->you_tube_link }}" target="_blank"><img src="{{ asset('public/uploads/images/you-tube1.svg')}}" alt="" /> </a>
                     @endif
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-sm-6 footer-text1">
                         <h2>Industries We Serve</h2>
-                        
+
                         @foreach ($project_categories as $project_category)
                         <ul>
                             <li><a href="{{route('project-details',$project_category->slug)}}">{{ $project_category->name }}</a></li>
@@ -74,7 +74,7 @@
                     <ul>
                         <li>
                             <img src="{{ asset('public/uploads/images/location1.svg')}}" alt="" />
-                            <p>  {{ $setting->site_address }} </p>
+                            <p> {{ $setting->site_address }} </p>
                         </li>
                         <li>
                             <img src="{{ asset('public/uploads/images/tale-phone1.svg')}}" alt="" />

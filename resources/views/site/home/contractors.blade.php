@@ -124,7 +124,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="show-all mt-1"><a href="#">View Portfolio <img src="{{ asset('public/uploads/images/arrow-aright1.svg')}}" alt=""></a> </div>
+                        <div class="show-all mt-1"><a href="#">View Portfolio<img src="{{ asset('public/uploads/images/arrow-aright1.svg')}}" alt=""></a> </div>
                     </div>
                 </div>
                 @endforeach

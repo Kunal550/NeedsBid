@@ -1000,7 +1000,7 @@
     border-radius: 60px;
     padding: 15px 20px;
     color: #fff;
-    font-size: 24px;
+    font-size: 24px;    
     font-weight: 7000;
     text-align: center;
 }
@@ -1619,7 +1619,14 @@
 }
 
 /* passworld-inp */
-
+.atable .delete{
+    padding-left: 10px;
+    color:  red;
+}
+.atable .edit{
+    color: green;
+    
+}
 @media (max-width: 1400px) {
     .equal-text1 {
         padding-left: 20px;

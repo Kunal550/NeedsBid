@@ -57,6 +57,7 @@ Route::middleware(['common'], ['roleif:user'])->group(function () {
     Route::match(['GET', 'POST'],'/documents/destroy', [DocumentController::class, 'destroy'])->name('documents.destroy');
 
     Route::prefix('project')->name('project.')->group(function () {
+        Route::match(['GET', 'POST'], 'create', [ProjectController::class, "create"])->name('create');
         Route::match(['GET', 'POST'], 'list', [ProjectController::class, "index"])->name('list');
     });
 

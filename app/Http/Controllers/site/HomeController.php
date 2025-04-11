@@ -25,10 +25,6 @@ use App\Models\NewsLetter;
 use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\TestimonialModel;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
-
-use PDF;
 
 class HomeController extends Controller
 {
@@ -47,7 +43,6 @@ class HomeController extends Controller
 
     public function Contractors(Request $request)
     {
-        // dd($request->all());
         $contractor = $request->contractor;
         $project_category = $request->project_category;
         $data['contractorCheckBox'] = [];

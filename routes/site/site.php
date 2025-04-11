@@ -25,8 +25,7 @@ Route::middleware(['common'], ['roleif:user'])->group(function () {
     Route::match(['GET', 'POST'], '/', [HomeController::class, 'index'])->name('/');
     Route::match(['GET', 'POST'], 'about-us', [HomeController::class, "AboutUs"])->name('about-us');
     Route::match(['GET', 'POST'], 'brands', [HomeController::class, "Brands"])->name('brands');
-    Route::match(['GET', 'POST'], 'generate-qr', [HomeController::class, "generateQrCode"])->name('generate.qr');
-    Route::match(['GET', 'POST'], 'get-scanner', [HomeController::class, "showScanner"])->name('scanner.show');
+    
 
     Route::match(['GET', 'POST'], 'blog', [HomeController::class, "blog"])->name('blog');
     Route::match(['GET', 'POST'], 'faqs', [HomeController::class, "faq"])->name('faqs');

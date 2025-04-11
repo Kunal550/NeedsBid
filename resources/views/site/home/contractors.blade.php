@@ -59,8 +59,8 @@
 <div class="find-contract-main common-padding">
     <div class="container">
         <div class="row">
-            <form action="" id="filter-form" method="get">
-                <div class="col-sm-4 find-contractleft">
+            <form action="" id="filter-form" class="col-sm-4" method="get">
+                <div class="find-contractleft">
                     <div class="find-contract-card tractor_trade">
                         <h2 class="find-heading-card">Contracters Trade</h2>
                         <ul>
@@ -102,11 +102,14 @@
                     <div class="business-mid-section1-profile-right">
                         <div class="top-section-one">
                             <h2>{{$project->title}}</h2>
+                            <div class="star_rating">
                             <div class="star-img">
                                 <img src="{{ asset('public/uploads/images/star-icon4.svg')}}" alt="" />
                                 <img src="{{ asset('public/uploads/images/star-icon4.svg')}}" alt="" />
                             </div>
                             <h5>3.00 ( 442 Reviews )</h5>
+                            </div>
+                            
                         </div>
                         <div class="mid-con-one">
                             <p>{!! $project->description !!}</p>

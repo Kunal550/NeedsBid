@@ -26,6 +26,7 @@ class AuthController extends Controller
 
     public function Userlogin(Request $request)
     {
+        
         $rules = [
             'email' => 'required',
             'password' => 'required'
@@ -147,12 +148,10 @@ class AuthController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'user_type' => 'required',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|regex:/^[0-9]{10}$/',
             'password' => 'required|min:8|required_with:confirm_password|same:confirm_password',
             'confirm_password' => 'required|same:password',
-            'address' => 'required',
             'captcha' => 'required|captcha'
         ];
 
@@ -167,7 +166,7 @@ class AuthController extends Controller
         $UserData = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'user_type_id' => $request->user_type,
+            'user_type_id' => 0,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'address' => $request->address,
@@ -232,6 +231,6 @@ class AuthController extends Controller
     {
         Auth::logout();
         $request->session()->invalidate();
-        return redirect()->route('login')->withSuccess('You are now logged out of the system.');
+        return redirect()->route('login_user')->withSuccess('You are now logged out of the system.');
     }
 }

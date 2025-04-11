@@ -1625,7 +1625,20 @@
 }
 .atable .edit{
     color: green;
-    
+}
+.news-latter-section-one input{
+    border: none;
+    outline: none;
+}
+
+
+.sec-space .pimg img{
+    width: 100%;
+    border-radius: 15px;
+}
+.sec-space {
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 @media (max-width: 1400px) {
     .equal-text1 {

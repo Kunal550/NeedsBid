@@ -52,7 +52,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <tr>
                                 <td>Ankit Kumar Saha</td>
                                 <td>
@@ -86,7 +85,8 @@
                                     <a href="#!" class="delete"><i class="fa-solid fa-trash"></i></a>
 
                                 </td>
-                            </tr> <tr>
+                            </tr>
+                            <tr>
                                 <td>Ankit Kumar Saha</td>
                                 <td>
                                     Institutional
@@ -103,10 +103,6 @@
 
                                 </td>
                             </tr>
-
-
-
-
                         </tbody>
                     </table>
                 </div>

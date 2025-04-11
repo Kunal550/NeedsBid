@@ -252,7 +252,7 @@
 </div>
 <div class="our-blog common-padding">
     <div class="container">
-        <div class="col-sm-6 mx-auto common-padding pt-0">
+        <div class="col-sm-7 mx-auto common-padding pt-0">
             <h3 class="common-sub-heading text-center ">Unlock the Latest in Projects, Construction Tech, and
                 Industry Insights</h3>
             <h2 class="common-heading text-center">Our Blogs</h2>

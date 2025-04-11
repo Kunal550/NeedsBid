@@ -24,15 +24,14 @@
     -------------------->
     <link rel="stylesheet" href="{{asset('public/front_end/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/front_end/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('public/front_end/css/fancybox.css')}}"> 
+    <link rel="stylesheet" href="{{asset('public/front_end/css/fancybox.css')}}">
     <link rel="stylesheet" href="{{asset('public/front_end/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/front_end/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('public/front_end/css/responsive.css')}}">
 </head>
 
 <body>
-    <main> 
-
+    <main>
         <!-- Scroll To Top Button -->
         <div class="go-top go-top-button active">
             <i class="fa fa-long-arrow-up"></i>
@@ -50,7 +49,7 @@
         <!-- HEADER -->
         @include('site.layout.header')
 
-      @yield('content');
+        @yield('content');
         <!-- FOOTER -->
         @include('site.layout.footer')
     </main>
@@ -58,8 +57,9 @@
     <script src="{{asset('public/front_end/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('public/front_end/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('public/front_end/js/sticky-sidebar.js')}}"></script>
-    <script src="{{asset('public/front_end/js/fancybox.js')}}"></script> 
-    <script src="{{asset('public/front_end/js/custom.js')}}"></script> 
+    <script src="{{asset('public/front_end/js/fancybox.js')}}"></script>
+    <script src="{{asset('public/front_end/js/custom.js')}}"></script>
 </body>
 @yield('script')
+
 </html>

@@ -39,21 +39,19 @@
             </div>
         </div>
         <div class="col-md-8 col-lg-9">
-            <div class="right-main">
+            <div class="right-main afrom-style ">
                 <form action="{{ route('update-password') }}" method="POST" enctype='multipart/form-data' id="signupForm"
                     class="row">
                     @csrf
                     <input type="hidden" name="account_id" value="{{ $profile->id }}">
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 ">
                         <label for="password">New Password</label>
-                        <div class="inputmain">
+                        <div class="inputmain passworld-inp">
                             <input type="password" id="new_password" minlength="6" maxlength="15" class="form-control"
                                 name="new_password">
-                            <button type="button" class="hide-icon btn btn-outline-secondary" id="togglePassword">
-                                <i class="fas fa-eye"></i>
-                            </button>
-
+                            <a class="i_icon eye" href="javascript:void(0);" onclick="NewPassword()"><i
+                                    class="fa fa-eye"></i></a>
                         </div>
                         @if ($errors->has('new_password'))
                         <span class="error"><small>{{ ucwords($errors->first('new_password')) }}</small></span>
@@ -61,21 +59,23 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="confirm_password">Confirm Password</label>
-                        <div class="inputmain">
+                        <div class="inputmain passworld-inp">
                             <input type="password" id="confirm_password" minlength="6" maxlength="15"
                                 class="form-control" name="confirm_password">
-                            <button type="button" class="hide-icon btn btn-outline-secondary" id="togglePassword1">
-                                <i class="fas fa-eye"></i>
-                            </button>
 
+                            <a href="javascript:void(0);" class="i_icon eye" onclick="ConfirmPassword()">
+                                <i class="fa fa-eye"></i>
+                            </a>
                         </div>
                         @if ($errors->has('confirm_password'))
                         <span class="error"><small>{{ ucwords($errors->first('confirm_password')) }}</small></span>
                         @endif
                     </div>
                     <div class="form-group col-md-6">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Update Password</button>
+                        <div class="form-group get-started-now">
+                            <button type="submit" class="get-started-button"><span>
+                            Update Password
+                            </span></button>
                         </div>
                     </div>
                 </form>
@@ -118,31 +118,33 @@
     });
 
 
-    $('#togglePassword').on('click', function() {
-        const passwordField = $('#new_password');
-        const icon = $(this).find('i');
-
-        if (passwordField.attr('type') === 'password') {
-            passwordField.attr('type', 'text');
-            icon.removeClass('fa-eye').addClass('fa-eye-slash');
+    $('#pass_change').click(function(e) {
+        if ($(this).prop('checked') == true) {
+            $('.showPass').show();
         } else {
-            passwordField.attr('type', 'password');
-            icon.removeClass('fa-eye-slash').addClass('fa-eye');
+            $('.showPass').hide();
+
         }
+
     });
 
-    $('#togglePassword1').on('click', function() {
-        const passwordField = $('#confirm_password');
-        const icon = $(this).find('i');
-
-        if (passwordField.attr('type') === 'password') {
-            passwordField.attr('type', 'text');
-            icon.removeClass('fa-eye').addClass('fa-eye-slash');
+    function NewPassword() {
+        var x = document.getElementById("new_password");
+        if (x.type === "password") {
+            x.type = "text";
         } else {
-            passwordField.attr('type', 'password');
-            icon.removeClass('fa-eye-slash').addClass('fa-eye');
+            x.type = "password";
         }
-    });
+    }
+
+    function ConfirmPassword() {
+        var x = document.getElementById("confirm_password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 
     setTimeout(() => {
         $('.error').hide();

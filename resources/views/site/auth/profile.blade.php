@@ -12,39 +12,39 @@
 </script>
 @endif
 
-<div class="container emp-profile">
-    <div class="row">
-        <div class="col-md-12">
-            <h2>My Account</h2>
-        </div>
-        <div class="col-md-4 col-lg-3">
-            <div class="left-bar">
-                @include('site.auth.layout.sidebar')
+    <div class="container emp-profile">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>My Account</h2>
             </div>
-        </div>
-        <div class="col-md-8 col-lg-9">
-            <div class="right-main">
-
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="">Name</label>
-                        <input type="text" class="form-control" readonly placeholder="{{ $profile->name }}">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="">Email</label>
-                        <input type="text" class="form-control" readonly placeholder="{{ $profile->email }}">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="">Phone</label>
-                        <input type="text" class="form-control" readonly placeholder="{{ $profile->phone }}">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="">Address</label>
-                        <input type="text" class="form-control" readonly placeholder="{{ $profile->address }}">
-                    </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="left-bar">
+                    @include('site.auth.layout.sidebar')
                 </div>
+            </div>
+            <div class="col-md-8 col-lg-9">
+                <div class="right-main">
 
-                <!-- <table class="table">
+                    <div class="row afrom-style">
+                        <div class="form-group col-md-6 ">
+                            <label for="">Name</label>
+                            <input type="text" class="form-control" readonly placeholder="{{ $profile->name }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Email</label>
+                            <input type="text" class="form-control" readonly placeholder="{{ $profile->email }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Phone</label>
+                            <input type="text" class="form-control" readonly placeholder="{{ $profile->phone }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Address</label>
+                            <input type="text" class="form-control" readonly placeholder="{{ $profile->address }}">
+                        </div>
+                    </div>
+                    
+                    <!-- <table class="table">
                         <tbody>
                             <tr>
                                 <td>Name</td>
@@ -64,11 +64,13 @@
                             </tr>
                         </tbody>
                     </table> -->
+                    <div class="get-started-now">
+                        <a href="{{ route('account-details') }}" class="get-started-button"><span>Edit Details</span></a>
 
-                <a href="{{ route('account-details') }}" class="btn btn-primary">Edit Details</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 @endsection

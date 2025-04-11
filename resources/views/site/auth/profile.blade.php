@@ -25,8 +25,8 @@
             <div class="col-md-8 col-lg-9">
                 <div class="right-main">
 
-                    <div class="row">
-                        <div class="form-group col-md-6">
+                    <div class="row afrom-style">
+                        <div class="form-group col-md-6 ">
                             <label for="">Name</label>
                             <input type="text" class="form-control" readonly placeholder="{{ $profile->name }}">
                         </div>
@@ -64,8 +64,10 @@
                             </tr>
                         </tbody>
                     </table> -->
+                    <div class="get-started-now">
+                        <a href="{{ route('account-details') }}" class="get-started-button"><span>Edit Details</span></a>
 
-                    <a href="{{ route('account-details') }}" class="btn btn-primary">Edit Details</a>
+                    </div>
                 </div>
             </div>
         </div>

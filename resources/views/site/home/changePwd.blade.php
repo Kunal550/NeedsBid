@@ -39,18 +39,18 @@
             </div>
         </div>
         <div class="col-md-8 col-lg-9">
-            <div class="right-main">
+            <div class="right-main afrom-style ">
                 <form action="{{ route('update-password') }}" method="POST" enctype='multipart/form-data' id="signupForm"
                     class="row">
                     @csrf
                     <input type="hidden" name="account_id" value="{{ $profile->id }}">
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 ">
                         <label for="password">New Password</label>
-                        <div class="inputmain">
+                        <div class="inputmain passworld-inp">
                             <input type="password" id="new_password" minlength="6" maxlength="15" class="form-control"
                                 name="new_password">
-                            <a class="i_icon" href="javascript:void(0);" onclick="NewPassword()"><i
+                            <a class="i_icon eye" href="javascript:void(0);" onclick="NewPassword()"><i
                                     class="fa fa-eye"></i></a>
                         </div>
                         @if ($errors->has('new_password'))
@@ -59,11 +59,11 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="confirm_password">Confirm Password</label>
-                        <div class="inputmain">
+                        <div class="inputmain passworld-inp">
                             <input type="password" id="confirm_password" minlength="6" maxlength="15"
                                 class="form-control" name="confirm_password">
 
-                            <a href="javascript:void(0);" class="i_icon" onclick="ConfirmPassword()">
+                            <a href="javascript:void(0);" class="i_icon eye" onclick="ConfirmPassword()">
                                 <i class="fa fa-eye"></i>
                             </a>
                         </div>
@@ -72,8 +72,10 @@
                         @endif
                     </div>
                     <div class="form-group col-md-6">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Update Password</button>
+                        <div class="form-group get-started-now">
+                            <button type="submit" class="get-started-button"><span>
+                            Update Password
+                            </span></button>
                         </div>
                     </div>
                 </form>

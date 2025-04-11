@@ -54,23 +54,24 @@
 
 
 
-
-    <div class="how-need-birds">
-        <div class="row align-items-center">
-            <div class="col-sm-6 wow bounceInLeft">
-                @if (!empty($content_below_brands->content_images))
-                <img src="{{ asset('public/uploads/content_images/' . $content_below_brands->content_images) }}"
-                    alt="">
-                @else
-                <img src="{{ asset('public/uploads/content_images/noimg.png') }}" alt="">
-                @endif
-            </div>
-            <div class="col-sm-6 wow bounceInLeft">
-                <div class="how-needs-birds">
-
-                    <p>{!! $content_below_brands->description !!}</p>
-                    <div class="get-started-now">
-                        <a href="{{ $content_below_brands->button_link }}" class="get-started-button wow bounceInLeft"><span>{{ $content_below_brands->button_name }}</span></a>
+    <div class="home-page">
+        <div class="how-need-birds ">
+            <div class="row align-items-center">
+                <div class="col-sm-6 wow bounceInLeft">
+                    @if (!empty($content_below_brands->content_images))
+                    <img src="{{ asset('public/uploads/content_images/' . $content_below_brands->content_images) }}"
+                        alt="">
+                    @else
+                    <img src="{{ asset('public/uploads/content_images/noimg.png') }}" alt="">
+                    @endif
+                </div>
+                <div class="col-sm-6 wow bounceInLeft">
+                    <div class="how-needs-birds">
+    
+                        <p>{!! $content_below_brands->description !!}</p>
+                        <div class="get-started-now">
+                            <a href="{{ $content_below_brands->button_link }}" class="get-started-button wow bounceInLeft"><span>{{ $content_below_brands->button_name }}</span></a>
+                        </div>
                     </div>
                 </div>
             </div>

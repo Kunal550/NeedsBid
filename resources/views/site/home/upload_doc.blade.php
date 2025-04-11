@@ -41,34 +41,78 @@
             </div>
         </div>
         <div class="col-md-8 col-lg-9">
-            <div class="right-main">
+            <div class="right-main afrom-style">
                 <form action="{{ route('documents.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <label for="document_type">Document Type:</label>
                     <input type="text" name="document_type" class="form-control">
+                    <div class="img-input buseness-dupload">
+                        <div>
+                            <input type="file" name="documents[]" multiple>
+                            <p class="img-alter"><span class="text-danger">*</span>accept(.jpg, .png, .docx, .pdf)</p>
+                           
+                        </div>
 
-                    <input type="file" name="documents[]" multiple>
-                    <button type="submit">Upload</button>
+                        <div class="form-group get-started-now">
+                            <button type="submit" class="get-started-button"> <span>Upload</span></button>
+                        </div>
+                    </div>
                 </form>
 
 
-                <div class="form-group col-md-6">
-                    <div class="d-flex">
-                        <div class="pr-2">
-                            <div class="inputmain">
-                                @foreach ($documents as $document)
-                                <p><strong>{{ $document->document_type }}:&nbsp;</strong>
-                                    <a href="{{ URL::to('public/uploads/admin/documents/' . $document->file_path) }}" target="_blank">{{ $document->file_path }}</a>
-                                    <a href="javascript:void(0);" onclick="delete_document({{ $document->id }})">
-                                        <i class="fa fa-trash text-danger"></i>
-                                    </a>
-                                </p>
-                                @endforeach
+                <!-- <div class="form-group">
+                        <div class="d-flex">
+                            <div class="pr-2">
+                                <div class="inputmain">
+                                    @foreach ($documents as $document)
+                                    <p><strong>{{ $document->document_type }}:&nbsp;</strong>
+                                        <a href="{{ URL::to('public/uploads/admin/documents/' . $document->file_path) }}" target="_blank">{{ $document->file_path }}</a>
 
+
+                                        <a href="javascript:void(0);" onclick="delete_document({{ $document->id }})">
+                                            <i class="fa fa-trash text-danger"></i>
+                                        </a>
+                                    </p>
+                                    @endforeach
+
+                                </div>
                             </div>
                         </div>
+                    </div> -->
+                <div class="form-group mt-5">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered m-0">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Document Type</th>
+                                    <th scope="col">Link</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($documents as $document)
+                                <tr>
+                                    <td class="font-weight-bold">{{ $document->document_type }}</td>
+                                    <td>
+                                        <a href="{{ URL::to('public/uploads/admin/documents/' . $document->file_path) }}"
+                                            target="_blank"
+                                            class="btn btn-link p-0">
+                                            {{ $document->file_path }}
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="javascript:void(0);" onclick="delete_document({{ $document->id }})">
+                                            <i class="fa fa-trash text-danger"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -102,7 +146,7 @@
                                         location.reload();
                                     }, 3000);
 
-                                    
+
                                 }
                             },
                             error: function(err) {

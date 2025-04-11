@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="col-md-8 col-lg-9">
-            <div class="right-main">
+            <div class="right-main afrom-style">
                 <form action="{{ route('account-details-update') }}" method="POST" enctype='multipart/form-data'
                     id="signupForm" class="row">
                     @csrf
@@ -49,8 +49,8 @@
 
                     <div class="form-group col-md-6">
                         <label for="profile_image">Profile Image</label>
-                        <div class="d-flex">
-                            <div class="inputmain pr-2">
+                        <div class="d-flex align-items-center">
+                            <div class="inputmain pr-2 img-input">
                                 <input class="form-control" type="file" name="profile_image" id="profile_image"
                                     value="">
                             </div>
@@ -126,8 +126,8 @@
                     
                     
                     <div class="form-group col-md-6">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Update Account</button>
+                        <div class="form-group get-started-now">
+                            <button type="submit" class="get-started-button"><span>Update Account</span></button>
                         </div>
                     </div>
                 </form>

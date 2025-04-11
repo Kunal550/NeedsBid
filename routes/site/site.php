@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\site\HomeController;
 use App\Http\Controllers\site\AuthController;
 use App\Http\Controllers\site\DocumentController;
+use App\Http\Controllers\site\ProjectController;
 use App\Http\Controllers\site\ServicesController;
 
 
@@ -54,4 +55,11 @@ Route::middleware(['common'], ['roleif:user'])->group(function () {
     Route::match(['GET', 'POST'], '/documents-create', [DocumentController::class, 'doc_create'])->name('documents.create');
     Route::match(['GET', 'POST'],'/documents-store', [DocumentController::class, 'store'])->name('documents.store');
     Route::match(['GET', 'POST'],'/documents/destroy', [DocumentController::class, 'destroy'])->name('documents.destroy');
+
+    Route::prefix('project')->name('project.')->group(function () {
+        Route::match(['GET', 'POST'], 'list', [ProjectController::class, "index"])->name('list');
+    });
+
+    
+    
 });

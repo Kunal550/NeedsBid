@@ -22,6 +22,8 @@ $prefix = request()->segment(2);
     <li><a href="{{ route('documents.create') }}" class="{{ $route == 'documents.create' ? 'active' : '' }}"> <i class="fa fa-file-invoice"></i> Business Document</a></li>
 
     <li><a href="{{ route('change-password') }}" class="{{ $route == 'change-password' ? 'active' : '' }}"><i class="fa fa-lock"></i> Change Password</a></li>
+    <hr>
+    <li><a href="{{ route('project.list') }}" class="{{ $route == 'project.list' ? 'active' : '' }}"><i class="fa-solid fa-file-powerpoint"></i> Post Jobs</a></li>
+    <hr>
     <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
-
 </ul>

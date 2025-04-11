@@ -80,5 +80,6 @@ class ProjectController extends Controller
         }
 
         return redirect()->route('project.list')->withSuccess('Project Added Successfully!!');
+        return view('site.project.create');
     }
 }

@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - export DEPLOY_PATH=/home2/creatyz1/public_html/development/needbids/
+    - /bin/rm -rf $DEPLOY_PATH/*                  # Clear old files
+    - /bin/cp -Rf . $DEPLOY_PATH                  # Copy everything
+    - /bin/chmod -R 755 $DEPLOY_PATH              # Fix permissions
+    - /usr/local/bin/npm install --production     # Install Node.js deps
+    - /usr/local/bin/npm run build                # Build React/Vue

@@ -58,6 +58,8 @@ Route::middleware(['common'], ['roleif:user'])->group(function () {
 
     Route::prefix('project')->name('project.')->group(function () {
         Route::match(['GET', 'POST'], 'list', [ProjectController::class, "index"])->name('list');
+        Route::match(['GET', 'POST'], 'create', [ProjectController::class, "create"])->name('create');
+        Route::match(['GET', 'POST'], 'store', [ProjectController::class, "store"])->name('store');
     });
 
     

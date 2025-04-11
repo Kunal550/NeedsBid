@@ -43,8 +43,7 @@ $setting = App\Models\Setting::first();
             </div>
         </div>
     </div>
-
-    <div class="header-bottom">
+<div class="header-bottom">
         <div class="container">
             <div class="row align-item-center">
                 <div class="col-sm-10 header-left-menu">
@@ -74,6 +73,7 @@ $setting = App\Models\Setting::first();
                     </div>
                 </div>
             </div>
-        </div>
     </div>
+</div>
+   
 </header>
